@@ -8,7 +8,7 @@
 [![Release](https://img.shields.io/github/v/release/op7418/malfoy-desktop?label=release&color=3e8e63)](https://github.com/op7418/malfoy-desktop/releases)
 [![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-c9d3d6)](LICENSE)
 [![macOS](https://img.shields.io/badge/macOS-Apple%20Silicon-111111?logo=apple&logoColor=white)](https://github.com/op7418/malfoy-desktop/releases)
-[![Windows](https://img.shields.io/badge/Windows-Wallpaper%20Engine-1b2838?logo=steam&logoColor=white)](#下载)
+[![Windows](https://img.shields.io/badge/Windows-Wallpaper%20Engine-1b2838?logo=steam&logoColor=white)](https://steamcommunity.com/sharedfiles/filedetails/?id=3828922581)
 <br />
 [![Made with Jimeng](https://img.shields.io/badge/made%20with-%E5%8D%B3%E6%A2%A6%20AI%20%E7%9F%AD%E5%89%A7%E5%B7%A5%E4%BD%9C%E5%AE%A4-3e8e63)](https://jimeng.jianying.com/)
 [![Three.js](https://img.shields.io/badge/Three.js-r160-000000?logo=threedotjs&logoColor=white)](https://threejs.org/)
@@ -21,6 +21,21 @@
 **中文** · [English](#english)
 
 </div>
+
+## 怎么用
+
+**macOS**（仅支持 Apple Silicon）
+1. 到 [Releases](https://github.com/op7418/malfoy-desktop/releases) 下载 `Miss-Malfoy-mac-arm64.dmg`，打开后把 Miss Malfoy 拖进「应用程序」。
+2. 安装包没有签名，第一次打开会被拦下：右键 → 打开；如果还是打不开，到「系统设置 → 隐私与安全性」，在最下面点「仍要打开」。
+3. 打开后她会出现在桌面上，菜单栏多出一个 🐍。选「和她互动…」进入互动模式，就能点她、打开下面的菜单，第一章在「剧情」里。按 Esc 回到壁纸模式。
+
+**Windows**（Wallpaper Engine）
+1. 在 Steam 上装好 Wallpaper Engine。
+2. 打开[创意工坊页面](https://steamcommunity.com/sharedfiles/filedetails/?id=3828922581)，点「订阅」，然后在 Wallpaper Engine 里选中它。
+3. 第一次打开会先播第一章，看完她会走进休息室。
+4. 要能点到她，在 Wallpaper Engine 的设置里打开「鼠标输入」。声音默认是关的，在壁纸属性里打开「壁纸声音」。
+
+> 刚上架的几个小时里，创意工坊页面可能显示「不兼容」或者打不开。这是 Wallpaper Engine 的反垃圾审核，通常几个小时内会自动解除，晚点再来就行。
 
 一个用 **即梦 AI 短剧工作室** 做的沉浸式角色扮演加 AI 女友桌面 Demo。
 
@@ -35,13 +50,6 @@
 - 架构与生成过程，事无巨细：**[技术文档.md](技术文档.md)**
 - 素材说明：**[MEDIA.md](MEDIA.md)**
 - 后续计划：**[TODO.md](TODO.md)**
-
-## 下载
-
-macOS 版到 [Releases](https://github.com/op7418/malfoy-desktop/releases) 下载，Windows 版去 Steam 创意工坊订阅：
-
-- **macOS**：`Miss-Malfoy-mac-arm64.dmg`。仅支持 Apple Silicon，没有签名，第一次打开要**右键 → 打开**。打开后菜单栏会出现一个 🐍，选「和她互动…」进入可点击模式，按 Esc 回到壁纸模式。
-- **Windows**：Wallpaper Engine 创意工坊，即将上线。要能点到她，需要在 Wallpaper Engine 的设置里打开「鼠标输入」。
 
 ## 仓库里有什么
 
@@ -102,6 +110,21 @@ npx hyperframes render -o renders/输出.mp4
 
 ## English
 
+### How to use
+
+**macOS** (Apple Silicon only)
+1. Download `Miss-Malfoy-mac-arm64.dmg` from [Releases](https://github.com/op7418/malfoy-desktop/releases) and drag Miss Malfoy into Applications.
+2. The app is unsigned, so macOS blocks it the first time: right-click → **Open**. If it still won't open, go to **System Settings → Privacy & Security** and click **Open Anyway** at the bottom.
+3. She appears on your desktop and a 🐍 shows up in the menu bar. Choose "和她互动…" (Interact) to click her and use the menu; Chapter One is under 「剧情」 (Story). Press Esc to go back to wallpaper mode.
+
+**Windows** (Wallpaper Engine)
+1. Install Wallpaper Engine on Steam.
+2. Open the [Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3828922581), click **Subscribe**, then select it in Wallpaper Engine.
+3. The first launch plays Chapter One, then she walks into the common room.
+4. Turn on **Mouse input** in Wallpaper Engine settings to interact with her. Sound is off by default; turn on 「壁纸声音」 (wallpaper sound) in the wallpaper's properties.
+
+> For the first few hours after upload, the Workshop page may show "incompatible" or fail to load. That is Wallpaper Engine's anti-spam check, which usually clears on its own within a few hours.
+
 **Malfoy Desktop** (马尔福桌面) is an immersive role-play demo and AI desktop companion starring Miss Malfoy, built with **Jimeng AI Short Drama Studio** (即梦 AI 短剧工作室).
 
 You play a new transfer student sorted into Slytherin. Late one night in the Restricted Section, you run into Miss Malfoy. After Chapter One, she stays on your desktop, in the Slytherin common room:
@@ -113,11 +136,6 @@ You play a new transfer student sorted into Slytherin. Late one night in the Res
 - **Pensieve**: replay any memory you have already seen.
 
 All footage, characters and voiced dialogue were generated with Jimeng; the music was made with Suno. Editing, the magic transitions (Floo flames, Pensieve swirl, Lumos flare, silver ink, a Slytherin sigil — all in Three.js) and the desktop app are code.
-
-### Download
-
-- **macOS** (Apple Silicon): `Miss-Malfoy-mac-arm64.dmg` from [Releases](https://github.com/op7418/malfoy-desktop/releases). The app is unsigned, so right-click → **Open** the first time. A 🐍 appears in the menu bar; choose "和她互动…" (Interact) to click around, and press Esc to go back to wallpaper mode.
-- **Windows**: coming soon on the Wallpaper Engine Steam Workshop. Turn on **Mouse input** in Wallpaper Engine settings to interact with her.
 
 ### What is in this repo
 

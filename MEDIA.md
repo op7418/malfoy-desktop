@@ -7,7 +7,7 @@
 | 文件 | 内容 |
 | --- | --- |
 | [Releases](https://github.com/op7418/malfoy-desktop/releases) 里的 `Miss-Malfoy-mac-arm64.dmg` | macOS 桌面程序（Apple Silicon，未签名） |
-| Wallpaper Engine 创意工坊（即将上线） | Windows 版 |
+| [Wallpaper Engine 创意工坊](https://steamcommunity.com/sharedfiles/filedetails/?id=3828922581) | Windows 版 |
 
 ## 从源码运行需要哪些素材
 
