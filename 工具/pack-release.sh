@@ -11,6 +11,6 @@ DIST=${1:-$(ls -d 桌面程序/mac/dist-v* | sort -V | tail -1)}
 cp "$DIST"/*.dmg "$OUT/Miss-Malfoy-mac-arm64.dmg"
 rm -rf "$OUT/wallpaper-engine" && mkdir -p "$OUT/wallpaper-engine"
 cp -R 桌面程序/app/. "$OUT/wallpaper-engine/"
-cp 桌面程序/wallpaper-engine/project.json 桌面程序/wallpaper-engine/preview.jpg "$OUT/wallpaper-engine/"
+cp 桌面程序/wallpaper-engine/project.json 桌面程序/wallpaper-engine/preview.gif 桌面程序/wallpaper-engine/preview.jpg "$OUT/wallpaper-engine/"
 (cd "$OUT" && rm -f Miss-Malfoy-WallpaperEngine.zip && zip -r -q Miss-Malfoy-WallpaperEngine.zip wallpaper-engine -x "*.DS_Store" && rm -rf wallpaper-engine)
 ls -lh "$OUT"
