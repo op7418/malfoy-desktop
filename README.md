@@ -1,8 +1,9 @@
 <div align="center">
 
-# 马尔福桌面 · Miss Malfoy
+# 马尔福桌面 · Malfoy Desktop
 
-**A living desktop companion — an interactive short drama set in the Slytherin common room.**
+**和马尔福小姐（Miss Malfoy）一起，住进斯莱特林公共休息室的互动桌面。**<br />
+**Live with Miss Malfoy in the Slytherin common room — an interactive short drama on your desktop.**
 
 [![Release](https://img.shields.io/github/v/release/op7418/malfoy-desktop?label=release&color=3e8e63)](https://github.com/op7418/malfoy-desktop/releases)
 [![License](https://img.shields.io/badge/license-PolyForm%20Noncommercial-c9d3d6)](LICENSE)
@@ -15,7 +16,7 @@
 [![HyperFrames](https://img.shields.io/badge/video-HyperFrames-555555)](https://hyperframes.heygen.com/)
 [![Music by Suno](https://img.shields.io/badge/music-Suno-000000)](https://suno.com/)
 
-<img src="docs/teaser.gif" alt="Miss Malfoy teaser" width="720" />
+<img src="docs/teaser.gif" alt="Malfoy Desktop teaser" width="720" />
 
 **中文** · [English](#english)
 
@@ -101,7 +102,7 @@ npx hyperframes render -o renders/输出.mp4
 
 ## English
 
-**Miss Malfoy** is an immersive role-play demo and AI desktop companion built with **Jimeng AI Short Drama Studio** (即梦 AI 短剧工作室).
+**Malfoy Desktop** (马尔福桌面) is an immersive role-play demo and AI desktop companion starring Miss Malfoy, built with **Jimeng AI Short Drama Studio** (即梦 AI 短剧工作室).
 
 You play a new transfer student sorted into Slytherin. Late one night in the Restricted Section, you run into Miss Malfoy. After Chapter One, she stays on your desktop, in the Slytherin common room:
 
