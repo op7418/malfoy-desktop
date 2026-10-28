@@ -1,0 +1,18 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="root" data-composition-id="t1" data-width="1920" data-height="1080">
+    <canvas id="t1-cv" width="1920" height="1080"></canvas>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const fx = MalfoyMagic.lumos(document.getElementById("t1-cv"), {"image": "assets/fx/t1-a.jpg", "x": 0.595, "y": 0.45});
+    window.__hf = window.__hf || {};
+    window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady["t1"] = fx.ready.then(() => fx.render());
+    tl.fromTo(fx.state, { p: 0, t: 0 }, { p: 1, t: 1.25, duration: 1.25, ease: "none", onUpdate: fx.render }, 0);
+    window.__timelines["t1"] = tl;
+  </script>
+</template>

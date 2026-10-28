@@ -1,0 +1,18 @@
+{
+  "file": "index.html",
+  "type": "web",
+  "title": "Miss Malfoy · 马尔福小姐",
+  "description": "互动动态壁纸：斯莱特林公共休息室里的马尔福小姐。点她、看第一章互动剧情、提升好感度解锁新装扮。画面与对白由即梦 AI 短剧工作室生成。",
+  "preview": "preview.jpg",
+  "tags": ["Anime", "Relaxing"],
+  "contentrating": "Everyone",
+  "visibility": "private",
+  "general": {
+    "supportsaudioprocessing": false,
+    "properties": {
+      "showui": { "order": 0, "text": "显示界面（好感度与菜单）", "type": "bool", "value": true },
+      "sound": { "order": 1, "text": "壁纸声音", "type": "bool", "value": false },
+      "volume": { "order": 2, "text": "音量", "type": "slider", "min": 0, "max": 100, "value": 70 }
+    }
+  }
+}

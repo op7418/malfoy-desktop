@@ -1,0 +1,35 @@
+{
+  "$schema": "https://hyperframes.heygen.com/schema/hyperframes.json",
+  "registry": "https://raw.githubusercontent.com/heygen-com/hyperframes/main/registry",
+  "paths": {
+    "blocks": "compositions",
+    "components": "compositions/components",
+    "assets": "assets"
+  },
+  "media": {
+    "autoProxy": true
+  },
+  "authoringSkill": "hyperframes",
+  "registryItems": [
+    {
+      "name": "three-orbiting-cards",
+      "type": "hyperframes:component",
+      "target": "compositions/components/three-orbiting-cards.html"
+    },
+    {
+      "name": "particle-text-dissolve",
+      "type": "hyperframes:component",
+      "target": "compositions/components/particle-text-dissolve.html"
+    },
+    {
+      "name": "organic-light-leak-overlay",
+      "type": "hyperframes:block",
+      "target": "compositions/organic-light-leak-overlay.html"
+    },
+    {
+      "name": "grain-overlay",
+      "type": "hyperframes:component",
+      "target": "compositions/components/grain-overlay.html"
+    }
+  ]
+}

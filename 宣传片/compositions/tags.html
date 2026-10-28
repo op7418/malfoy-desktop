@@ -1,0 +1,40 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    .tg { position: absolute; left: 150px; top: 168px; padding: 14px 26px 14px 22px; background: rgba(8, 12, 14, 0.6); border-left: 4px solid #3e8e63; opacity: 0; }
+    .tg .a { font-family: "PF"; font-weight: 500; font-size: 28px; color: #9fd0b2; letter-spacing: 0.16em; }
+    .tg .b { font-family: "PF"; font-weight: 400; font-size: 34px; color: #f1f3f2; margin-top: 4px; letter-spacing: 0.06em; }
+  </style>
+  <div id="root" data-composition-id="tags" data-width="1920" data-height="1080">
+
+    <div class="tg" id="tg-b"><div class="a">你选了 B</div><div class="b">你戒指上的蛇。</div></div>
+    <div class="tg" id="tg-a"><div class="a">如果你选 A</div><div class="b">什么都没看到。</div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo("#tg-b", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.3, ease: "expo.out" }, 0.1);
+    tl.to("#tg-b", { opacity: 0, duration: 0.15 }, 2.25);
+    tl.fromTo("#tg-a", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.25, ease: "expo.out" }, 2.45);
+    tl.to("#tg-a", { opacity: 0, duration: 0.12 }, 3.3);
+    window.__timelines["tags"] = tl;
+  </script>
+</template>

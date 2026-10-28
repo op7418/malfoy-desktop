@@ -1,0 +1,48 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    #ft-scrim { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.45) 45%, rgba(0,0,0,0) 75%); opacity: 0; }
+    #ft { position: absolute; left: 150px; top: 520px; }
+    .fl { opacity: 0; margin-top: 26px; display: flex; align-items: baseline; gap: 26px; }
+    .fl .zh-l { font-size: 58px; font-weight: 400; }
+    .fl .display { font-size: 40px; color: #b9c4ca; }
+  </style>
+  <div id="root" data-composition-id="feats" data-width="1920" data-height="1080">
+
+    <div id="ft-scrim"></div>
+    <div id="ft" class="shadow">
+      <div class="fl" id="fl1"><div class="zh-l">4K 动态桌面</div><div class="display">a living wallpaper</div></div>
+      <div class="fl" id="fl2"><div class="zh-l">分支互动剧情</div><div class="display">a branching story</div></div>
+      <div class="fl" id="fl3"><div class="zh-l">Mac · Windows</div><div class="display">Wallpaper Engine ready</div></div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    [["#fl1", 0.0], ["#fl2", 0.57], ["#fl3", 1.15]].forEach(([id, t]) => {
+      tl.fromTo(id, { opacity: 0, x: -40, filter: "blur(10px)" }, { opacity: 1, x: 0, filter: "blur(0px)", duration: 0.35, ease: "expo.out" }, t);
+    });
+    tl.fromTo("#ft-scrim", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" }, 0);
+    tl.to("#ft-scrim", { opacity: 0, duration: 0.2 }, 1.83);
+    tl.to("#ft", { opacity: 0, filter: "blur(8px)", duration: 0.2, ease: "power2.in" }, 1.83);
+    window.__timelines["feats"] = tl;
+  </script>
+</template>

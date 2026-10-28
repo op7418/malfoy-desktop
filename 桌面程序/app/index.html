@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Miss Malfoy</title>
+    <link rel="stylesheet" href="lib/hogwarts-ui.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 桌面层：两个 video 交替做无缝衔接，底下垫一张锚点静帧 -->
+    <div id="stage">
+      <img id="still" alt="" />
+      <video id="amb" class="amb" muted playsinline preload="auto"></video>
+      <video id="amb2" class="amb" muted playsinline preload="auto"></video>
+      <video id="va" playsinline preload="auto"></video>
+      <video id="vb" playsinline preload="auto"></video>
+      <div id="hit" title="她在看书"></div>
+      <div id="bubble"><p class="zh"></p><p class="en"></p></div>
+    </div>
+
+    <!-- 常驻 UI -->
+    <div id="hud" class="hw-panel">
+      <div id="hud-name" class="hw-title">Miss Malfoy</div>
+      <div id="hud-row">
+        <span class="hud-label">好感度</span>
+        <div id="aff-bar"><div id="aff-fill"></div></div>
+        <span id="aff-num">0</span>
+      </div>
+      <div id="hud-call"></div>
+    </div>
+
+    <nav id="dock">
+      <button class="hw-plaque" data-act="story"><span class="k">剧情</span><span class="e">STORY</span></button>
+      <button class="hw-plaque" data-act="pensieve"><span class="k">冥想盆</span><span class="e">MEMORIES</span></button>
+      <button class="hw-plaque" data-act="album"><span class="k">相册</span><span class="e">ALBUM</span></button>
+      <button class="hw-plaque" data-act="wardrobe"><span class="k">衣橱</span><span class="e">WARDROBE</span></button>
+      <button class="hw-plaque" data-act="sound"><span class="k" id="sound-k">声音 关</span><span class="e">SOUND</span></button>
+    </nav>
+
+    <div id="toast" class="hw-panel"><div class="a"></div><div class="b"></div></div>
+
+    <!-- 面板：剧情 / 冥想盆 / 衣橱 -->
+    <div id="panel" class="hidden">
+      <div id="panel-box" class="hw-panel">
+        <div id="panel-title" class="hw-title"></div>
+        <div id="panel-body"></div>
+        <button id="panel-close">关闭</button>
+      </div>
+    </div>
+
+    <!-- 相册大图 -->
+    <div id="photo" class="hidden">
+      <figure id="photo-fig">
+        <div id="photo-frame"><img id="photo-img" alt="" /><span id="photo-date"></span></div>
+        <figcaption><p class="zh"></p><p class="en"></p><p class="where"></p></figcaption>
+      </figure>
+    </div>
+
+    <!-- 剧情播放器 -->
+    <div id="player" class="hidden">
+      <video id="pv" playsinline preload="auto"></video>
+      <div id="cap"><p class="zh"></p><p class="en"></p></div>
+      <div id="choice" class="hidden">
+        <canvas id="choice-fx" width="1920" height="1080"></canvas>
+        <div id="choice-box" class="hw-panel">
+          <div id="choice-label" class="hw-title">The Choice</div>
+          <div id="choice-prompt">她在等你的回答</div>
+          <div id="choice-timer"><div id="choice-timer-fill"></div></div>
+          <button class="opt hw-option" data-pick="A"><span class="key">A</span>什么都没看到。</button>
+          <button class="opt hw-option" data-pick="B"><span class="key">B</span>你戒指上的蛇。</button>
+        </div>
+      </div>
+      <div id="card" class="hidden"><div class="zh"></div><div class="en"></div></div>
+      <button id="skip">跳过 ›</button>
+    </div>
+
+    <audio id="bgm" src="media/bgm.mp3" loop preload="auto"></audio>
+
+    <script src="lib/three.min.js"></script>
+    <script src="lib/fx.js"></script>
+    <script src="lib/magic.js"></script>
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

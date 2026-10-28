@@ -1,0 +1,49 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    #ou-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+    #ou { position: absolute; left: 150px; top: 0; opacity: 0; }
+    #ou-pb { position: absolute; left: 0; top: 435px; font-size: 64px; white-space: nowrap; }
+    #ou-name { position: absolute; left: 0; top: 525px; font-size: 118px; line-height: 1; white-space: nowrap; font-weight: 300; letter-spacing: 0.06em; }
+    #ou-sub { position: absolute; left: 4px; top: 690px; font-family: "PF"; font-weight: 400; font-size: 30px; letter-spacing: 0.2em; color: #aab5bb; white-space: nowrap; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1920" data-height="1080">
+
+    <canvas id="ou-cv" width="1920" height="1080"></canvas>
+    <div id="ou" data-layout-ignore><div id="ou-pb" class="display">Powered by</div><div id="ou-name" class="zh-l">即梦 AI 短剧工作室</div></div>
+    <div id="ou-sub" style="left: 154px">剧本 · 角色 · 分镜 · 视频 · 配音　一站完成</div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    const fx = MalfoyMagic.ink(document.getElementById("ou-cv"), { lines: [
+      { text: "Powered by", font: "italic 500 64px Cormorant", x: 150, y: 467 },
+      { text: "即梦 AI 短剧工作室", font: "300 118px PF", x: 150, y: 584, spacing: "7px" },
+    ] });
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady["outro"] = fx.ready.then(() => fx.render());
+    tl.fromTo(fx.state, { p: 0, t: 0 }, { p: 1, t: 1.3, duration: 1.3, ease: "power1.inOut", onUpdate: fx.render }, 0.05);
+    tl.fromTo(fx.state, { fade: 0 }, { fade: 1, duration: 0.3, ease: "power1.in", onUpdate: fx.render }, 2.55);
+    tl.to("#ou-sub", { opacity: 0, duration: 0.3, ease: "power1.in" }, 2.55);
+    tl.fromTo("#ou-sub", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.4, ease: "expo.out" }, 1.2);
+    window.__timelines["outro"] = tl;
+  </script>
+</template>

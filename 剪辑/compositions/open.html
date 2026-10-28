@@ -1,0 +1,64 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    .blk { position: absolute; left: 150px; top: 600px; }
+    #op-en { font-size: 78px; margin-top: 22px; }
+    #op-zh { font-size: 34px; margin-top: 20px; }
+    #tt { top: 470px; left: 140px; }
+    #tt-en { font-size: 236px; margin-top: 18px; }
+    #tt-row { display: flex; align-items: center; gap: 28px; margin-top: 26px; padding-left: 10px; }
+    #tt-rule { width: 120px; }
+    #tt-zh { font-size: 46px; letter-spacing: 0.5em; }
+  </style>
+  <div id="root" data-composition-id="open" data-width="1920" data-height="1080">
+
+    <div id="op" class="blk shadow">
+      <div id="op-eb" class="eyebrow">沉浸式角色扮演</div>
+      <div id="op-en" class="display">You are the new transfer student.</div>
+      <div id="op-zh" class="zh-l">入学第三天。你是斯莱特林新来的转学生。</div>
+    </div>
+    <div id="tt" class="blk shadow">
+      <div id="tt-eb" class="eyebrow">第一章 · 午夜禁书区</div>
+      <div id="tt-en" class="display">Miss Malfoy</div>
+      <div id="tt-row"><div id="tt-rule" class="rule g"></div><div id="tt-zh" class="zh-l">马尔福小姐</div></div>
+    </div>
+  </div>
+  <script>
+    function splitChars(sel) {
+      document.querySelectorAll(sel).forEach((el) => {
+        const t = el.textContent; el.textContent = "";
+        for (const c of t) { const s = document.createElement("span"); s.className = "ch"; s.textContent = c === " " ? "\u00a0" : c; el.appendChild(s); }
+      });
+    }
+    const tl = gsap.timeline({ paused: true });
+    splitChars("#op-en"); splitChars("#tt-en");
+    tl.fromTo("#op-eb", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 0.5);
+    tl.fromTo("#op-en .ch", { opacity: 0, yPercent: 40, filter: "blur(12px)" }, { opacity: 1, yPercent: 0, filter: "blur(0px)", duration: 0.7, ease: "expo.out", stagger: 0.02 }, 0.65);
+    tl.fromTo("#op-zh", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" }, 1.2);
+    tl.to("#op", { opacity: 0, filter: "blur(10px)", duration: 0.4, ease: "power2.in" }, 3.5);
+    tl.fromTo("#tt-en .ch", { opacity: 0, yPercent: 40, filter: "blur(12px)" }, { opacity: 1, yPercent: 0, filter: "blur(0px)", duration: 0.9, ease: "expo.out", stagger: 0.05 }, 4.0);
+    tl.fromTo("#tt-eb", { opacity: 0, x: -24 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 4.25);
+    tl.fromTo("#tt-rule", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "expo.out" }, 4.55);
+    tl.fromTo("#tt-zh", { opacity: 0, x: -16 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 4.7);
+    tl.to("#tt", { opacity: 0, filter: "blur(10px)", duration: 0.45, ease: "power2.in" }, 7.35);
+    window.__timelines["open"] = tl;
+  </script>
+</template>

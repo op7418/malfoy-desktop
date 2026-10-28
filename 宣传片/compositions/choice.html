@@ -1,0 +1,100 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+    @font-face { font-family: "Cinzel"; src: url("assets/fonts/cinzel-600.woff2") format("woff2"); font-weight: 600; }
+    @font-face { font-family: "Cinzel"; src: url("assets/fonts/cinzel-700.woff2") format("woff2"); font-weight: 700; }
+
+    #root { position: absolute; inset: 0; }
+    #cc-shade { position: absolute; inset: 0; background: radial-gradient(ellipse at 72% 42%, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.72) 62%); opacity: 0; }
+    #cc-frame { position: absolute; left: 120px; top: 560px; width: 720px; height: 380px; z-index: 1; opacity: 0; background-color: transparent; }
+    #cc-frame.hw-panel { --hw-bg: rgba(6, 12, 9, 0.55); }
+    #cc-cv { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; z-index: 2; }
+    #cc-ui { position: absolute; left: 160px; top: 598px; width: 640px; z-index: 3; perspective: 1200px; }
+    #cc-label { font-family: "Cinzel"; font-weight: 600; font-size: 28px; letter-spacing: 0.34em; }
+    #cc-prompt { margin-top: 8px; font-family: "PF"; font-weight: 400; font-size: 32px; letter-spacing: 0.2em; color: #e6ecef; }
+    #cc-timer { margin-top: 18px; width: 640px; }
+    .hw-option { height: 88px; margin-top: 20px; padding: 0 28px; transform-origin: 0% 50%; }
+    .hw-option .k { font-family: "Cormorant"; font-style: italic; font-weight: 500; font-size: 54px; color: #aab5bb; width: 30px; }
+    .hw-option .t { font-family: "PF"; font-weight: 400; font-size: 38px; color: #f1f3f2; letter-spacing: 0.08em; }
+    #cc-cursor { position: absolute; left: 0; top: 0; width: 42px; height: 42px; opacity: 0; z-index: 4; }
+    #cc-head { position: absolute; left: 150px; top: 190px; }
+    #cc-en { font-size: 92px; margin-top: 18px; }
+    #cc-zh { font-size: 34px; margin-top: 18px; }
+  </style>
+  <div id="root" data-composition-id="choice" data-width="1920" data-height="1080" data-layout-allow-overlap>
+    <div id="cc-shade"></div>
+    <div id="cc-frame" class="hw-panel"></div>
+    <canvas id="cc-cv" width="1920" height="1080"></canvas>
+    <div id="cc-ui">
+      <div id="cc-label" class="hw-title">The Choice</div>
+      <div id="cc-prompt">她在等你的回答</div>
+      <div id="cc-timer" class="hw-rule"></div>
+      <div class="hw-option" id="cc-a"><span class="k">A</span><span class="t">什么都没看到。</span></div>
+      <div class="hw-option" id="cc-b"><span class="k" id="cc-bk">B</span><span class="t">你戒指上的蛇。</span></div>
+    </div>
+    <div id="cc-head" class="shadow">
+      <div id="cc-eb" class="eyebrow">你的选择</div>
+      <div id="cc-en" class="display">She remembers every choice.</div>
+      <div id="cc-zh" class="zh-l">每个选择，她都记得。</div>
+    </div>
+    <svg id="cc-cursor" viewBox="0 0 24 24"><path d="M4 2 L4 20 L9 15.5 L12.5 22 L15.5 20.6 L12 14.2 L19 14.2 Z" fill="#ffffff" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/></svg>
+  </div>
+  <script>
+    function splitChars(sel) {
+      document.querySelectorAll(sel).forEach((el) => {
+        const t = el.textContent; el.textContent = "";
+        for (const c of t) { const s = document.createElement("span"); s.className = "ch"; s.textContent = c === " " ? "\u00a0" : c; el.appendChild(s); }
+      });
+    }
+    const tl = gsap.timeline({ paused: true });
+    // 法阵居中在选项面板上；被选项 B 的矩形用于边框光流和翡翠火
+    const fx = MalfoyMagic.sigil(document.getElementById("cc-cv"), { cx: 480, cy: 750, size: 1000, strength: 0.5, fire: 0.45 });
+    const st = fx.state;
+    Object.assign(st, { hx: 480, hy: 862, hw: 640, hh: 88 });
+    tl.fromTo(st, { t: 0 }, { t: 4.49, duration: 4.49, ease: "none", onUpdate: fx.render }, 0);
+    tl.fromTo(st, { appear: 0 }, { appear: 1, duration: 0.9, ease: "power2.out", onUpdate: fx.render }, 0.95);
+    tl.fromTo(st, { hover: 0 }, { hover: 1, duration: 0.4, ease: "power2.out", onUpdate: fx.render }, 2.35);
+    tl.fromTo(st, { click: 0 }, { click: 1, duration: 1.2, ease: "none", onUpdate: fx.render }, 2.88);
+    tl.to(st, { appear: 0, duration: 0.45, ease: "power2.in", onUpdate: fx.render }, 3.75);
+    tl.fromTo("#cc-shade", { opacity: 0 }, { opacity: 1, duration: 0.5, ease: "power2.out" }, 0.6);
+    tl.fromTo("#cc-frame", { opacity: 0, scale: 0.97 }, { opacity: 1, scale: 1, duration: 0.6, ease: "expo.out" }, 0.95);
+    tl.fromTo(["#cc-label", "#cc-prompt", "#cc-timer"], { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.45, ease: "expo.out", stagger: 0.08 }, 1.05);
+    tl.fromTo(["#cc-a", "#cc-b"], { opacity: 0, x: -36, rotationY: -24 }, { opacity: 1, x: 0, rotationY: 0, duration: 0.6, ease: "expo.out", stagger: 0.12 }, 1.15);
+    tl.fromTo("#cc-timer", { scaleX: 1 }, { scaleX: 0.2, duration: 1.63, ease: "none" }, 1.25);
+    tl.fromTo("#cc-cursor", { opacity: 0, x: 1280, y: 930 }, { opacity: 1, duration: 0.15 }, 1.75);
+    tl.to("#cc-cursor", { x: 560, y: 866, duration: 0.6, ease: "power3.inOut" }, 1.8);
+    tl.set("#cc-b", { className: "hw-option is-hover" }, 2.35);
+    tl.to("#cc-b", { scale: 1.03, duration: 0.3, ease: "power2.out" }, 2.35);
+    tl.to("#cc-a", { opacity: 0.4, duration: 0.3 }, 2.4);
+    tl.fromTo("#cc-cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, transformOrigin: "15% 10%" }, 2.84);
+    tl.to("#cc-cursor", { scale: 1, duration: 0.12 }, 2.9099999999999997);
+    tl.set("#cc-bk", { color: "#6fd39a" }, 2.88);
+    tl.to("#cc-timer", { opacity: 0, duration: 0.2 }, 2.88);
+    tl.to("#cc-cursor", { opacity: 0, duration: 0.2 }, 3.23);
+    tl.to(["#cc-ui", "#cc-frame"], { opacity: 0, filter: "blur(8px)", duration: 0.4, ease: "power2.in" }, 3.75);
+    tl.to("#cc-shade", { opacity: 0, duration: 0.5, ease: "power1.inOut" }, 4.49);
+    splitChars("#cc-en");
+    tl.fromTo("#cc-eb", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.45, ease: "expo.out" }, 0.85);
+    tl.fromTo("#cc-en .ch", { opacity: 0, yPercent: 45, filter: "blur(10px)" }, { opacity: 1, yPercent: 0, filter: "blur(0px)", duration: 0.5, ease: "expo.out", stagger: 0.014 }, 0.95);
+    tl.fromTo("#cc-zh", { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out" }, 1.2999999999999998);
+    tl.to("#cc-head", { opacity: 0, filter: "blur(8px)", duration: 0.35, ease: "power2.in" }, 3.75);
+    window.__hf = window.__hf || {}; window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady["choice"] = fx.ready;
+    window.__timelines["choice"] = tl;
+  </script>
+</template>

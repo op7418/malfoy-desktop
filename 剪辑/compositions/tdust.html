@@ -1,0 +1,18 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; }
+    canvas { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; }
+  </style>
+  <div id="root" data-composition-id="tdust" data-width="1920" data-height="1080">
+    <canvas id="tdust-cv" width="1920" height="1080"></canvas>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    const fx = MalfoyMagic.floo(document.getElementById("tdust-cv"), {"image": "assets/fx/choice-a.jpg", "ox": 0.25, "oy": 0.8, "seed": 7});
+    window.__hf = window.__hf || {};
+    window.__hf.buildReady = window.__hf.buildReady || {};
+    window.__hf.buildReady["tdust"] = fx.ready.then(() => fx.render());
+    tl.fromTo(fx.state, { p: 0, t: 0 }, { p: 1, t: 1.6, duration: 1.6, ease: "none", onUpdate: fx.render }, 0);
+    window.__timelines["tdust"] = tl;
+  </script>
+</template>

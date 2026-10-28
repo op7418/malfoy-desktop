@@ -1,0 +1,81 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    #mb { position: absolute; left: 0; top: 0; width: 1920px; height: 40px; background: rgba(16, 20, 18, 0.55); display: flex; align-items: center; justify-content: space-between; padding: 0 22px; opacity: 0; }
+    #mb .l, #mb .r { display: flex; gap: 26px; align-items: center; font-family: "PF"; font-weight: 500; font-size: 20px; color: #f2f4f3; }
+    #hud { position: absolute; left: 70px; top: 80px; padding: 16px 26px; background: rgba(8, 12, 14, 0.6); opacity: 0; }
+    #hud-name { font-family: "Cormorant"; font-weight: 600; font-size: 30px; letter-spacing: 0.3em; color: #eef1f2; }
+    #hud-row { margin-top: 8px; display: flex; align-items: center; gap: 16px; }
+    #hud-l { font-family: "PF"; font-weight: 500; font-size: 28px; color: #dfe4e7; letter-spacing: 0.1em; }
+    #aff-bar { width: 300px; height: 8px; background: rgba(255,255,255,0.22); }
+    #aff-f { width: 100%; height: 100%; background: #3e8e63; transform-origin: 0 50%; }
+    #aff-n { font-family: "Cormorant"; font-weight: 600; font-size: 32px; color: #eef1f2; min-width: 52px; }
+    #dock { position: absolute; right: 70px; bottom: 54px; display: flex; gap: 8px; opacity: 0; }
+    .db { padding: 12px 22px; background: rgba(8, 12, 14, 0.6); font-family: "PF"; font-weight: 500; font-size: 28px; color: #eef1f2; letter-spacing: 0.1em; }
+    #toast { position: absolute; right: 70px; top: 80px; padding: 16px 28px; background: rgba(10, 18, 14, 0.8); border-left: 6px solid #3e8e63; opacity: 0; }
+    #toast .a { font-family: "PF"; font-weight: 500; font-size: 28px; color: #9fd0b2; letter-spacing: 0.12em; }
+    #toast .b { margin-top: 6px; font-family: "PF"; font-weight: 400; font-size: 36px; color: #f2f2f0; letter-spacing: 0.06em; }
+    #dk-big { position: absolute; left: 150px; top: 700px; }
+    #dk-en { font-size: 104px; margin-top: 16px; }
+    #dk-zh { font-size: 36px; margin-top: 18px; }
+    #cursor { position: absolute; left: 0; top: 0; width: 42px; height: 42px; opacity: 0; }
+    #ripple { position: absolute; left: 0; top: 0; width: 90px; height: 90px; margin: -45px 0 0 -45px; border: 3px solid #eef1f2; border-radius: 50%; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="desk" data-width="1920" data-height="1080">
+
+    <div id="mb" data-layout-ignore><div class="l"><b>Miss Malfoy</b><span>文件</span><span>编辑</span><span>显示</span><span>窗口</span></div><div class="r"><span>🐍</span><span>10月28日 周二 23:14</span></div></div>
+    <div id="hud"><div id="hud-name">MISS MALFOY</div><div id="hud-row"><span id="hud-l">好感度</span><div id="aff-bar"><div id="aff-f"></div></div><span id="aff-n">12</span></div></div>
+    <div id="dock"><div class="db">剧情</div><div class="db">冥想盆</div><div class="db">衣橱</div><div class="db">声音</div></div>
+    <div id="toast"><div class="a">好感度 20 · 已解锁</div><div class="b">居家装扮 · 扶手椅</div></div>
+    <div id="dk-big" class="shadow"><div id="dk-eb" class="eyebrow">AI 女友桌面</div><div id="dk-en" class="display">She lives on your desktop.</div><div id="dk-zh" class="zh-l">她就住在你的桌面上。</div></div>
+    <div id="ripple"></div>
+    <svg id="cursor" viewBox="0 0 24 24"><path d="M4 2 L4 20 L9 15.5 L12.5 22 L15.5 20.6 L12 14.2 L19 14.2 Z" fill="#ffffff" stroke="#111" stroke-width="1.2" stroke-linejoin="round"/></svg>
+  </div>
+  <script>
+    function splitChars(sel) {
+      document.querySelectorAll(sel).forEach((el) => {
+        const t = el.textContent; el.textContent = "";
+        for (const c of t) { const s = document.createElement("span"); s.className = "ch"; s.textContent = c === " " ? "\u00a0" : c; el.appendChild(s); }
+      });
+    }
+    const tl = gsap.timeline({ paused: true });
+    splitChars("#dk-en");
+    tl.fromTo("#aff-f", { scaleX: 0.12 }, { scaleX: 0.12, duration: 0.01 }, 0);
+    tl.fromTo(["#mb", "#hud", "#dock"], { opacity: 0 }, { opacity: 1, duration: 0.4, ease: "power2.out", stagger: 0.08 }, 0.45);
+    tl.fromTo("#dk-eb", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.4, ease: "expo.out" }, 0.5);
+    tl.fromTo("#dk-en .ch", { opacity: 0, yPercent: 45, filter: "blur(10px)" }, { opacity: 1, yPercent: 0, filter: "blur(0px)", duration: 0.5, ease: "expo.out", stagger: 0.016 }, 0.6);
+    tl.fromTo("#dk-zh", { opacity: 0 }, { opacity: 1, duration: 0.4 }, 0.95);
+    tl.to("#dk-big", { opacity: 0, filter: "blur(8px)", duration: 0.25, ease: "power2.in" }, 2.15);
+    tl.fromTo("#cursor", { opacity: 0, x: 1500, y: 860 }, { opacity: 1, duration: 0.15 }, 2.55);
+    tl.to("#cursor", { x: 760, y: 560, duration: 0.6, ease: "power3.inOut" }, 2.65);
+    tl.fromTo("#cursor", { scale: 1 }, { scale: 0.82, duration: 0.07, transformOrigin: "15% 10%" }, 3.32);
+    tl.to("#cursor", { scale: 1, duration: 0.12 }, 3.39);
+    tl.fromTo("#ripple", { opacity: 0.9, scale: 0.3, x: 766, y: 564 }, { opacity: 0, scale: 1.4, duration: 0.6, ease: "power2.out", immediateRender: false }, 3.34);
+    tl.set("#aff-n", { textContent: "13" }, 3.4);
+    tl.to("#aff-f", { scaleX: 0.13, duration: 0.4, ease: "expo.out" }, 3.4);
+    tl.to("#cursor", { opacity: 0, duration: 0.2 }, 3.9);
+    tl.set("#aff-n", { textContent: "20" }, 5.3);
+    tl.to("#aff-f", { scaleX: 0.2, duration: 0.5, ease: "expo.out" }, 5.3);
+    tl.fromTo("#toast", { opacity: 0, x: 30 }, { opacity: 1, x: 0, duration: 0.35, ease: "expo.out" }, 5.35);
+    tl.to(["#toast", "#hud", "#dock", "#mb"], { opacity: 0, duration: 0.25, ease: "power2.in" }, 6.35);
+    window.__timelines["desk"] = tl;
+  </script>
+</template>

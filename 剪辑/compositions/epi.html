@@ -1,0 +1,50 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    #epi-wrap { position: absolute; inset: 0; overflow: hidden; opacity: 0; }
+    #epi-img { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; object-fit: cover; transform-origin: 62% 55%; }
+    #epi-scrim { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 60% at 18% 72%, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0) 100%); }
+    #ep { position: absolute; left: 150px; top: 610px; width: 1300px; }
+    #ep-zh { font-size: 40px; line-height: 1.5; }
+    #ep-en { font-size: 60px; margin-top: 18px; line-height: 1.05; }
+  </style>
+  <div data-hf-id="hf-gbvx" id="root" data-composition-id="epi" data-width="1920" data-height="1080">
+
+    <div data-hf-id="hf-knqg" id="epi-wrap"><img data-color-grading="{&quot;preset&quot;:null,&quot;intensity&quot;:1,&quot;adjust&quot;:{&quot;exposure&quot;:-0.1,&quot;contrast&quot;:0.1,&quot;highlights&quot;:-0.1,&quot;shadows&quot;:0,&quot;whites&quot;:0,&quot;blacks&quot;:0.04,&quot;temperature&quot;:0,&quot;tint&quot;:0,&quot;vibrance&quot;:0,&quot;saturation&quot;:-0.12},&quot;details&quot;:{&quot;vignette&quot;:0.34,&quot;vignetteMidpoint&quot;:0.5,&quot;vignetteRoundness&quot;:0,&quot;vignetteFeather&quot;:0.65,&quot;grain&quot;:0.16,&quot;grainSize&quot;:0.32,&quot;grainRoughness&quot;:0.5},&quot;effects&quot;:{&quot;blur&quot;:0,&quot;pixelate&quot;:0,&quot;chromaBleed&quot;:0,&quot;tapeDamage&quot;:0,&quot;tapeTracking&quot;:0,&quot;tapeNoise&quot;:1,&quot;tapeSpeed&quot;:0.5,&quot;filmArtifacts&quot;:0,&quot;halftone&quot;:0,&quot;halftoneSize&quot;:0,&quot;twoInkPrint&quot;:0,&quot;twoInkPrintSize&quot;:0,&quot;ascii&quot;:0,&quot;asciiSize&quot;:0.06578947368421052,&quot;asciiInvert&quot;:0,&quot;asciiStyle&quot;:0,&quot;asciiColor&quot;:1,&quot;asciiRotation&quot;:0,&quot;dither&quot;:0,&quot;ditherSize&quot;:0,&quot;bloom&quot;:0.35,&quot;bloomRadius&quot;:8,&quot;monoScreen&quot;:0,&quot;monoScreenSize&quot;:0,&quot;monoScreenAngle&quot;:0,&quot;monoScreenSpread&quot;:0,&quot;monoScreenShape&quot;:0,&quot;monoScreenInvert&quot;:0,&quot;scanlines&quot;:0,&quot;scanlineCount&quot;:0,&quot;scanlineSoftness&quot;:0,&quot;chromaticAberration&quot;:0,&quot;chromaticAngle&quot;:0,&quot;crtCurvature&quot;:0,&quot;digitalGlitch&quot;:0,&quot;digitalGlitchColorSplit&quot;:0,&quot;digitalGlitchLineTear&quot;:0,&quot;digitalGlitchPixelate&quot;:0,&quot;digitalGlitchBlockAmount&quot;:0,&quot;digitalGlitchBlockDisplacement&quot;:0,&quot;digitalGlitchBlockOpacity&quot;:0,&quot;digitalGlitchSpeed&quot;:0,&quot;engraving&quot;:0,&quot;engravingSpacing&quot;:0.4117647058823529,&quot;engravingMinThickness&quot;:0.2,&quot;engravingMaxThickness&quot;:0.4571428571428572,&quot;engravingAngle&quot;:0.25,&quot;engravingContrast&quot;:0.4666666666666667,&quot;engravingSharpness&quot;:0.59,&quot;engravingWave&quot;:0.2,&quot;engravingWaveFrequency&quot;:0.2222222222222222,&quot;crosshatch&quot;:0,&quot;crosshatchSpacing&quot;:0.28,&quot;crosshatchThickness&quot;:0.25,&quot;crosshatchAngle&quot;:0.25,&quot;crosshatchContrast&quot;:0.3333333333333333,&quot;crosshatchEdges&quot;:0.5,&quot;crosshatchLineWeight&quot;:0,&quot;crosshatchWave&quot;:0.33,&quot;crosshatchWaveFrequency&quot;:0.2222222222222222,&quot;kuwahara&quot;:0,&quot;kuwaharaRadius&quot;:0.14285714285714285,&quot;kuwaharaSharpness&quot;:0.3125,&quot;kuwaharaSaturation&quot;:0.5},&quot;lut&quot;:null,&quot;colorSpace&quot;:&quot;rec709&quot;,&quot;wheels&quot;:{&quot;shadows&quot;:{&quot;hue&quot;:195,&quot;amount&quot;:0.08,&quot;level&quot;:-0.02},&quot;midtones&quot;:{&quot;hue&quot;:0,&quot;amount&quot;:0,&quot;level&quot;:0},&quot;highlights&quot;:{&quot;hue&quot;:36,&quot;amount&quot;:0.1,&quot;level&quot;:0}}}" data-hf-id="hf-949k" id="epi-img" src="assets/img/empty-sofa.jpg" alt=""><div data-hf-id="hf-u2o6" id="epi-scrim"></div></div>
+    <div data-hf-id="hf-i7jt" id="ep" class="shadow">
+      <div data-hf-id="hf-qewd" id="ep-eb" class="eyebrow">后来</div>
+      <div data-hf-id="hf-szex" id="ep-zh" class="zh-l" style="margin-top: 20px">在那以后，你经常会在斯莱特林的休息室，<br data-hf-id="hf-x5px">看到马尔福小姐。</div>
+      <div data-hf-id="hf-ncct" id="ep-en" class="display">After that night, you'd often find Miss Malfoy<br data-hf-id="hf-rsrt">in the Slytherin common room.</div>
+    </div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+
+    tl.fromTo("#epi-wrap", { opacity: 0 }, { opacity: 1, duration: 0.05, ease: "none" }, 0);
+    tl.fromTo("#epi-img", { scale: 1.0 }, { scale: 1.08, duration: 8, ease: "none" }, 0);
+    tl.fromTo("#ep-eb", { opacity: 0, x: -20 }, { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" }, 1.7);
+    tl.fromTo("#ep-zh", { opacity: 0, y: 14, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "expo.out" }, 1.9);
+    tl.fromTo("#ep-en", { opacity: 0, y: 14, filter: "blur(8px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.9, ease: "expo.out" }, 2.3);
+    tl.to("#ep", { opacity: 0, filter: "blur(8px)", duration: 0.5, ease: "power2.in" }, 7.0);
+    tl.to("#epi-wrap", { opacity: 0, duration: 0.7, ease: "power1.in" }, 7.3);
+    window.__timelines["epi"] = tl;
+  </script>
+</template>

@@ -1,0 +1,45 @@
+.DS_Store
+node_modules/
+__pycache__/
+venv/
+
+# ---- 大文件：不进 Git，打包进 Release 的素材包（见 MEDIA.md、工具/pack-release.sh）
+视频生成结果/
+音乐/
+生成素材/
+剪辑/assets/video/
+剪辑/assets/music/
+宣传片/assets/video/
+宣传片/assets/music/
+桌面程序/app/media/
+剪辑/renders/
+宣传片/renders/
+release/
+
+# 我们自己的素材和文案：不公开
+文章/
+剧本/
+操作手册.html
+桌面程序/icon/
+剪辑/assets/fx/
+剪辑/assets/img/
+宣传片/assets/fx/
+宣传片/assets/img/
+
+# Wallpaper Engine 版是 app/ 的拷贝，只保留工程文件
+桌面程序/wallpaper-engine/*
+!桌面程序/wallpaper-engine/project.json
+
+# 构建产物与缓存
+桌面程序/mac/dist*/
+桌面程序/mac/web/
+**/.hyperframes/
+
+# ---- 第三方内容：版权不属于我们，不能公开
+背景信息/
+视频素材/
+产品图片素材和使用方式介绍/
+
+# 旧版工程备份
+剪辑_v1备份/
+宣传片_v1备份/

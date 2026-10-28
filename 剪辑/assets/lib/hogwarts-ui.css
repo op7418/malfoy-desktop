@@ -1,0 +1,37 @@
+/* 霍格沃茨 · 斯莱特林 界面组件（宣传片、正片、桌面程序共用）
+   视频里不能用 CSS transition（不可逐帧定位），交互动效由各自的 GSAP / 程序样式加。 */
+@font-face { font-family: "Cinzel"; src: url("../fonts/cinzel-600.woff2") format("woff2"); font-weight: 600; }
+@font-face { font-family: "Cinzel"; src: url("../fonts/cinzel-700.woff2") format("woff2"); font-weight: 700; }
+:root {
+  --hw-ink: #eef2f1; --hw-silver: #c9d3d6; --hw-silver-dim: #8f9a9d; --hw-emerald: #3e8e63; --hw-emerald-hi: #6fd39a;
+  --hw-bg: rgba(7, 14, 11, 0.86);
+  --hw-noise: url("data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%22240%22%20height%3D%22240%22%3E%3Cfilter%20id%3D%22n%22%3E%3CfeTurbulence%20type%3D%22fractalNoise%22%20baseFrequency%3D%220.85%22%20numOctaves%3D%223%22%20stitchTiles%3D%22stitch%22/%3E%3CfeColorMatrix%20values%3D%220%200%200%200%200.75%20%200%200%200%200%200.82%20%200%200%200%200%200.78%20%200%200%200%200.09%200%22/%3E%3C/filter%3E%3Crect%20width%3D%22240%22%20height%3D%22240%22%20filter%3D%22url%28%23n%29%22/%3E%3C/svg%3E");
+}
+/* 面板：纯矩形。墨绿底 + 很淡的纸纹 + 一条银色细线，不加角花 */
+.hw-panel {
+  position: relative;
+  background: var(--hw-noise), linear-gradient(180deg, rgba(22, 40, 31, 0.5), rgba(0, 0, 0, 0) 60%), var(--hw-bg);
+  border: 1px solid rgba(201, 211, 214, 0.42);
+  border-radius: 0;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.5);
+}
+/* 碑刻体标题：金属渐变字 */
+.hw-title {
+  font-family: "Cinzel", serif; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase;
+  background: linear-gradient(180deg, #f4f7f7 0%, #c3ccce 45%, #7f8a8d 52%, #d9e0e1 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+/* 分隔线：两端渐隐的细线 */
+.hw-rule { height: 1px; background: linear-gradient(90deg, rgba(201,211,214,0.7), rgba(201,211,214,0.7) 70%, rgba(201,211,214,0)); }
+/* 选项：纯矩形 + 细银线；选中时边框变亮、翡翠内发光 */
+.hw-option {
+  position: relative; display: flex; align-items: center; gap: 22px;
+  background: rgba(8, 15, 12, 0.78);
+  border: 1px solid rgba(201, 211, 214, 0.3);
+  border-radius: 0;
+}
+.hw-option.is-hover, .hw-option:hover {
+  background: rgba(14, 34, 24, 0.86);
+  border-color: rgba(223, 232, 234, 0.85);
+  box-shadow: inset 0 0 24px rgba(62, 142, 99, 0.32);
+}

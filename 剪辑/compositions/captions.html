@@ -1,0 +1,60 @@
+<template>
+  <style>
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-300-normal.woff2") format("woff2"); font-weight: 300; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-normal.woff2") format("woff2"); font-weight: 500; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-600-normal.woff2") format("woff2"); font-weight: 600; font-style: normal; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-400-italic.woff2") format("woff2"); font-weight: 400; font-style: italic; }
+    @font-face { font-family: "Cormorant"; src: url("assets/fonts/cormorant-500-italic.woff2") format("woff2"); font-weight: 500; font-style: italic; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Light"), local("PingFangSC-Light"); font-weight: 300; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Regular"), local("PingFangSC-Regular"); font-weight: 400; }
+    @font-face { font-family: "PF"; src: local("PingFang SC Medium"), local("PingFangSC-Medium"); font-weight: 500; }
+    .eyebrow { font-family: "PF", sans-serif; font-weight: 500; font-size: 28px; letter-spacing: 0.34em; color: #b9c4ca; }
+    .display { font-family: "Cormorant", serif; font-style: italic; font-weight: 500; color: #f1f3f2; line-height: 0.92; letter-spacing: -0.005em; }
+    .zh-l { font-family: "PF", sans-serif; font-weight: 300; color: #e8ecee; letter-spacing: 0.14em; }
+    .en-cap { font-family: "Cormorant", serif; font-weight: 600; letter-spacing: 0.3em; text-transform: uppercase; color: #aab5bb; }
+    .rule { height: 2px; background: #c9d1d6; transform-origin: 0 50%; }
+    .rule.g { background: #3e8e63; }
+    .ch { display: inline-block; will-change: transform; }
+    .shadow { text-shadow: 0 2px 18px rgba(0, 0, 0, 0.55); }
+
+    #root { position: absolute; inset: 0; }
+
+    .cap { position: absolute; left: 0; right: 0; bottom: 22px; }
+    .cap-in { width: 100%; text-align: center; opacity: 0; }
+    .zh { font-family: "PF"; font-weight: 400; font-size: 38px; color: #f4f5f4; letter-spacing: 0.06em; }
+    .en { margin-top: 4px; font-family: "Cormorant"; font-style: italic; font-weight: 500; font-size: 34px; color: #c9d1d6; }
+  </style>
+  <div id="root" data-composition-id="captions" data-width="1920" data-height="1080">
+    <div id="cap01" class="clip cap" data-start="8.2" data-duration="3.75" data-track-index="0"><div class="cap-in" id="cap01-in"><p class="zh">入学第三天，就敢闯禁书区。</p><p class="en">Third day here, and already sneaking into the Restricted Section.</p></div></div>
+    <div id="cap02" class="clip cap" data-start="12.45" data-duration="2.35" data-track-index="0"><div class="cap-in" id="cap02-in"><p class="zh">胆子不小啊……对一个转学生来说。</p><p class="en">Bold… for a transfer student.</p></div></div>
+    <div id="cap03" class="clip cap" data-start="19.05" data-duration="4.15" data-track-index="0"><div class="cap-in" id="cap03-in"><p class="zh">这里不是你该来的地方。</p><p class="en">You shouldn't be here.</p></div></div>
+    <div id="cap04" class="clip cap" data-start="26.7" data-duration="3.3" data-track-index="0"><div class="cap-in" id="cap04-in"><p class="zh">你看到了什么？</p><p class="en">What did you see?</p></div></div>
+    <div id="cap05" class="clip cap" data-start="37.1" data-duration="2.5" data-track-index="0"><div class="cap-in" id="cap05-in"><p class="zh">……那你最好在天亮之前忘掉。</p><p class="en">…Then you'd best forget it before dawn.</p></div></div>
+    <div id="cap06" class="clip cap" data-start="44.85" data-duration="1.65" data-track-index="0"><div class="cap-in" id="cap06-in"><p class="zh">诺克斯。</p><p class="en">Nox.</p></div></div>
+    <div id="cap07" class="clip cap" data-start="47.1" data-duration="2.3" data-track-index="0"><div class="cap-in" id="cap07-in"><p class="zh">别动。</p><p class="en">Don't. Move.</p></div></div>
+    <div id="cap08" class="clip cap" data-start="59.5" data-duration="1.65" data-track-index="0"><div class="cap-in" id="cap08-in"><p class="zh">今晚，你什么都没看到。</p><p class="en">You saw nothing tonight.</p></div></div>
+    <div id="cap09" class="clip cap" data-start="61.7" data-duration="2.5" data-track-index="0"><div class="cap-in" id="cap09-in"><p class="zh">……还有，把领带系好。别丢斯莱特林的脸。</p><p class="en">…And fix your tie. You're embarrassing Slytherin.</p></div></div>
+  </div>
+  <script>
+    const tl = gsap.timeline({ paused: true });
+    tl.fromTo("#cap01-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 8.2);
+    tl.to("#cap01-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 11.8);
+    tl.fromTo("#cap02-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 12.45);
+    tl.to("#cap02-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 14.65);
+    tl.fromTo("#cap03-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 19.05);
+    tl.to("#cap03-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 23.05);
+    tl.fromTo("#cap04-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 26.7);
+    tl.to("#cap04-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 29.85);
+    tl.fromTo("#cap05-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 37.1);
+    tl.to("#cap05-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 39.45);
+    tl.fromTo("#cap06-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 44.85);
+    tl.to("#cap06-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 46.35);
+    tl.fromTo("#cap07-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 47.1);
+    tl.to("#cap07-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 49.25);
+    tl.fromTo("#cap08-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 59.5);
+    tl.to("#cap08-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 61.0);
+    tl.fromTo("#cap09-in", { opacity: 0, y: 6 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 61.7);
+    tl.to("#cap09-in", { opacity: 0, duration: 0.15, ease: "power2.in" }, 64.05);
+    window.__timelines["captions"] = tl;
+  </script>
+</template>
