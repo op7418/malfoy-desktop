@@ -14,13 +14,32 @@
     "appId": "demo.missmalfoy.desktop",
     "productName": "Miss Malfoy",
     "asar": false,
-    "files": ["main.js", "preload.js", "web/**/*"],
-    "mac": { "category": "public.app-category.entertainment", "target": ["dmg"], "identity": null, "extendInfo": { "LSUIElement": true } },
-    "dmg": { "title": "Miss Malfoy" },
-    "directories": { "output": "dist" }
+    "files": [
+      "main.js",
+      "preload.js",
+      "web/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.entertainment",
+      "target": [
+        "dmg"
+      ],
+      "identity": null,
+      "extendInfo": {
+        "LSUIElement": true
+      }
+    },
+    "dmg": {
+      "title": "Miss Malfoy"
+    },
+    "directories": {
+      "output": "dist"
+    }
   },
   "devDependencies": {
     "electron": "33.2.1",
     "electron-builder": "25.1.8"
-  }
+  },
+  "license": "PolyForm-Noncommercial-1.0.0",
+  "author": "op7418"
 }

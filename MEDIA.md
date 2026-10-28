@@ -2,12 +2,12 @@
 
 这个仓库只包含代码。视频、图片、音乐、剧本和文章都是我们自己的作品，**不公开**。
 
-想直接体验，去 [Releases](https://github.com/op7418/malfoy-desktop/releases) 下载安装包，里面已经带好了运行需要的素材：
+想直接体验，用下面的安装包，里面已经带好了运行需要的素材：
 
 | 文件 | 内容 |
 | --- | --- |
-| `Miss-Malfoy-mac-arm64.dmg` | macOS 桌面程序（Apple Silicon，未签名） |
-| `Miss-Malfoy-WallpaperEngine.zip` | Windows 版：Wallpaper Engine 网页壁纸工程 |
+| [Releases](https://github.com/op7418/malfoy-desktop/releases) 里的 `Miss-Malfoy-mac-arm64.dmg` | macOS 桌面程序（Apple Silicon，未签名） |
+| Wallpaper Engine 创意工坊【创意工坊链接】 | Windows 版 |
 
 ## 从源码运行需要哪些素材
 

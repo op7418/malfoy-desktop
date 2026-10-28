@@ -16,10 +16,10 @@
 
 ## 下载
 
-到 [Releases](https://github.com/op7418/malfoy-desktop/releases) 下载：
+macOS 版到 [Releases](https://github.com/op7418/malfoy-desktop/releases) 下载，Windows 版到创意工坊订阅：
 
 - **macOS**：`Miss-Malfoy-mac-arm64.dmg`。仅支持 Apple Silicon，没有签名，第一次打开要**右键 → 打开**。打开后菜单栏会出现一个 🐍，选「和她互动…」进入可点击模式，按 Esc 回到壁纸模式。
-- **Windows**：`Miss-Malfoy-WallpaperEngine.zip`。解压后，在 Wallpaper Engine 编辑器里「创建壁纸」，选择里面的 `index.html`；要能点到她，需要在设置里打开「鼠标输入」。
+- **Windows**：在 Steam 的 Wallpaper Engine 创意工坊订阅【创意工坊链接】。要能点到她，需要在 Wallpaper Engine 的设置里打开「鼠标输入」。
 
 ## 仓库里有什么
 
@@ -66,10 +66,10 @@ npx hyperframes render -o renders/输出.mp4
 
 ## 许可
 
-- **代码**：MIT，见 [LICENSE](LICENSE)
-- **安装包里的素材**（视频、图片、音乐）：只用于个人体验，不授权再分发、二次剪辑或商用
-- **字体**：各自遵循 SIL Open Font License 1.1
+- **代码**：[PolyForm Noncommercial 1.0.0](LICENSE)。可以学习、研究，也可以在非商业前提下修改和分发，**不能商用**；如需商用，请联系作者。
+- **安装包里的素材**（视频、图片、音乐）：只用于个人体验，不授权再分发、二次剪辑或商用。
+- **字体**：各自遵循 SIL Open Font License 1.1。
 
 ## 声明
 
-这是一个非商业的同人创作。《哈利·波特》相关的人物、名称、世界观版权归原作者及华纳兄弟所有，本项目与他们没有任何关联，也没有得到授权。角色"马尔福小姐"是基于原作人物的性转二创，所有出场人物均已成年。请勿将本项目用于商业用途，也不要上架到应用商店或 Wallpaper Engine 创意工坊。
+这是一个非商业的同人创作。《哈利·波特》相关的人物、名称、世界观版权归原作者及华纳兄弟所有，本项目与他们没有任何关联，也没有得到授权。角色"马尔福小姐"是基于原作人物的性转二创，所有出场人物均已成年。请勿将本项目用于商业用途，也不要把它重新打包上架到应用商店或创意工坊。官方的 Windows 版只发布在作者自己的创意工坊页面。
