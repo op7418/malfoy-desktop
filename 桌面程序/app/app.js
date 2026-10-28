@@ -5,6 +5,12 @@
   const MODE = params.get("mode") || "interactive"; // wallpaper | interactive
   document.body.dataset.mode = MODE;
 
+  // ---------- 素材格式 ----------
+  // Wallpaper Engine 的内置 Chromium（CEF）不带 H.264 / AAC / MP3 解码器，它的包里换成了 WebM / Ogg（tools/make-webm.sh）。
+  // ?webm=1 可以在普通浏览器里强制走这条路测试。
+  const NO_H264 = params.has("webm") || !document.createElement("video").canPlayType('video/mp4; codecs="avc1.4d4028, mp4a.40.2"');
+  const media = (src) => (NO_H264 && src ? src.replace(/\.mp4$/, ".webm").replace(/\.mp3$/, ".ogg") : src);
+
   // ---------- 存档 ----------
   const KEY = "malfoy-desktop-v1";
   const fresh = () => ({ aff: 0, seen: {}, chapterDone: {}, picks: {}, notified: {}, lastVisit: "", scene: "sofa", lastTouch: 0, sound: false });
@@ -89,6 +95,7 @@
   const scene = () => D.scenes[sceneId];
 
   const bgm = $("#bgm");
+  bgm.src = media("media/bgm.mp3");
   function applyVolume() {
     const muted = !S.sound || weMuted;
     va.muted = vb.muted = muted;
@@ -111,7 +118,7 @@
 
   function ambStart(el, src) {
     el.onended = null;
-    if (el.dataset.src !== src) { el.dataset.src = src; el.src = src; }
+    if (el.dataset.src !== src) { el.dataset.src = src; el.src = media(src); }
     el.currentTime = 0;
     el.loop = ambList.length === 1;
     el.play().catch(() => {});
@@ -150,7 +157,7 @@
     const v = back;
     v.onended = null;
     v.style.transition = "none";
-    v.src = src;
+    v.src = media(src);
     applyVolume();
     v.currentTime = 0;
     let finished = false;
@@ -188,6 +195,8 @@
       watchRaf = requestAnimationFrame(watch);
     };
     v.onended = finish;
+    // 解码失败时直接收尾，回到静止循环，不卡住后面的待机调度
+    v.onerror = () => { v.onerror = null; finish(); };
     v.load();
   }
 
@@ -309,6 +318,7 @@
   }
   function closePlayer() {
     playerOpen = false;
+    pv.onerror = null;
     pv.pause();
     pv.removeAttribute("src");
     pv.load();
@@ -326,15 +336,22 @@
     save();
     capList = c.caps || [];
     onClipEnd = onEnd;
-    pv.src = c.src;
+    pv.src = media(c.src);
     pv.muted = weMuted;
     pv.volume = weVolume;
     pv.onended = () => finishClip();
+    // 放不出来就提示一下并跳到下一段，不停在黑屏上
+    pv.onerror = () => {
+      pv.onerror = null;
+      toast("这段剧情无法播放", "已跳过 · " + id);
+      setTimeout(finishClip, 1200);
+    };
     pv.play().catch(() => {});
     tickCaps();
   }
   function finishClip() {
     pv.onended = null;
+    pv.onerror = null;
     cancelAnimationFrame(capRaf);
     showCap(null);
     const f = onClipEnd;
@@ -427,7 +444,7 @@
     setTimeout(() => { c.classList.add("hidden"); done && done(); }, ms);
   }
 
-  function runChapter(ch) {
+  function runChapter(ch, onDone) {
     openPlayer();
     let i = 0, pickKey = null;
     const step = () => {
@@ -439,6 +456,7 @@
           save();
           closePlayer();
           if (first) addAff(ch.reward);
+          if (onDone) onDone();
         });
       }
       if (s.branch) return playStory(s.branch[pickKey], step);
@@ -576,5 +594,13 @@
   renderHud();
   applyVolume();
   const startWithEntrance = !params.has("noenter");
-  enterScene(sceneId, startWithEntrance);
+  // 第一次打开（Wallpaper Engine 里没有菜单栏入口）：先看第一章，看完她再走进休息室。
+  // macOS 的两个窗口都带 mode/noenter 参数，不走这里。
+  const firstCh = D.chapters.find((c) => c.flow);
+  if (MODE === "interactive" && startWithEntrance && firstCh && !S.introPlayed && !S.chapterDone[firstCh.id]) {
+    S.introPlayed = 1;
+    save();
+    setStill(scene().empty || scene().anchor);
+    runChapter(firstCh, () => enterScene(sceneId, true));
+  } else enterScene(sceneId, startWithEntrance);
 })();
