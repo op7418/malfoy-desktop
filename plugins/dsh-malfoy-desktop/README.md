@@ -2,6 +2,12 @@
 
 [马尔福桌面](https://github.com/op7418/malfoy-desktop) 的 DeepSeek Harness（dsh）插件：整个 dsh 窗口换成斯莱特林公共休息室的动态视频，马尔福小姐躺在沙发上看书，陪你干活。
 
+<img src="https://raw.githubusercontent.com/op7418/malfoy-desktop/main/plugins/dsh-malfoy-desktop/screenshots/1-hero.jpg" alt="新会话" width="720" />
+
+| 开场的飞路火 | 对话中 | 侧栏「休息室」 |
+|---|---|---|
+| <img src="https://raw.githubusercontent.com/op7418/malfoy-desktop/main/plugins/dsh-malfoy-desktop/screenshots/2-floo.jpg" alt="开场" /> | <img src="https://raw.githubusercontent.com/op7418/malfoy-desktop/main/plugins/dsh-malfoy-desktop/screenshots/3-chat.jpg" alt="对话中" /> | <img src="https://raw.githubusercontent.com/op7418/malfoy-desktop/main/plugins/dsh-malfoy-desktop/screenshots/4-room.jpg" alt="休息室" /> |
+
 - **开场**：每天第一次打开，黑幕上浮出标题，绿色的飞路火从壁炉烧过整个屏幕，烧过的地方界面出来；之后再打开只有一次短的火焰转场。点黑幕可以跳过。
 - **新会话**：休息室清晰地铺在背后，输入框是一块深色玻璃，空白页的标语换成她的一句话。点她会回你一句。
 - **对话中**：背景虚焦压暗，不挡字。agent 做完一轮或者等你批准时，焦点拉回来一下，她抬头，输入框上方出一句台词；出错时只说一句。
