@@ -35,8 +35,6 @@
 3. 第一次打开会先播第一章，看完她会走进休息室。
 4. 要能点到她，在 Wallpaper Engine 的设置里打开「鼠标输入」。声音默认是关的，在壁纸属性里打开「壁纸声音」。
 
-> 刚上架的几个小时里，创意工坊页面可能显示「不兼容」或者打不开。这是 Wallpaper Engine 的反垃圾审核，通常几个小时内会自动解除，晚点再来就行。
-
 一个用 **即梦 AI 短剧工作室** 做的沉浸式角色扮演加 AI 女友桌面 Demo。
 
 你扮演刚转进斯莱特林的转学生，在午夜的禁书区遇见马尔福小姐。看完第一章之后，她会一直待在你桌面上的斯莱特林公共休息室里：
@@ -122,8 +120,6 @@ npx hyperframes render -o renders/输出.mp4
 2. Open the [Workshop page](https://steamcommunity.com/sharedfiles/filedetails/?id=3828922581), click **Subscribe**, then select it in Wallpaper Engine.
 3. The first launch plays Chapter One, then she walks into the common room.
 4. Turn on **Mouse input** in Wallpaper Engine settings to interact with her. Sound is off by default; turn on 「壁纸声音」 (wallpaper sound) in the wallpaper's properties.
-
-> For the first few hours after upload, the Workshop page may show "incompatible" or fail to load. That is Wallpaper Engine's anti-spam check, which usually clears on its own within a few hours.
 
 **Malfoy Desktop** (马尔福桌面) is an immersive role-play demo and AI desktop companion starring Miss Malfoy, built with **Jimeng AI Short Drama Studio** (即梦 AI 短剧工作室).
 
