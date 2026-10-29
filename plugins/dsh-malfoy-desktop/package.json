@@ -1,0 +1,40 @@
+{
+  "name": "dsh-malfoy-desktop",
+  "version": "0.1.0",
+  "description": "马尔福桌面 · DeepSeek Harness 主题：整个窗口换成斯莱特林公共休息室的动态视频，agent 做完、等你批准、出错时马尔福小姐会抬头说一句。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./cordis.patch.yml": "./cordis.patch.yml",
+    "./package.json": "./package.json",
+    "./locale/*.json": "./locale/*.json"
+  },
+  "icon": "./icon.svg",
+  "files": ["locale/*.json", "lib", "web", "cordis.patch.yml", "icon.svg", "README.md", "LICENSE"],
+  "keywords": ["dsh-plugin", "deepseek-harness", "dsh", "theme", "ai-companion", "desktop-pet", "slytherin"],
+  "author": "op7418",
+  "homepage": "https://github.com/op7418/malfoy-desktop",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/op7418/malfoy-desktop.git",
+    "directory": "plugins/dsh-malfoy-desktop"
+  },
+  "engines": {
+    "node": "^22.19.0 || >=24.0.0",
+    "dsh": ">=0.2.1-rc.2 <0.3.0"
+  },
+  "dsh": {
+    "bundle": { "patch": "./cordis.patch.yml" },
+    "client": {
+      "platform": "web",
+      "inject": ["@deepseek-ai/dsh-client-ui-theme"],
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.2.0 || ^19.0.0"
+  },
+  "license": "PolyForm-Noncommercial-1.0.0"
+}

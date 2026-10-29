@@ -64,6 +64,11 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 /* 壁纸模式（macOS 桌面层，不可点）：只留 HUD */
 body[data-mode="wallpaper"] #dock, body[data-mode="wallpaper"] #hit { display: none; }
 body.no-ui #hud, body.no-ui #dock { display: none; }
+/* DeepSeek Harness 背景：平时只有画面，点击由外层页面转进来；从侧栏「休息室」走进来时才显示 HUD 和菜单 */
+body[data-mode="dsh"]:not(.room) #hud, body[data-mode="dsh"]:not(.room) #dock, body[data-mode="dsh"]:not(.room) #hit { display: none; }
+/* 画面始终铺满整个 dsh 窗口，左边被侧栏挡住的部分（--inset-left）里不放界面 */
+body[data-mode="dsh"] #hud { left: calc(var(--inset-left, 0px) + 3.2vw); }
+body[data-mode="dsh"] #panel, body[data-mode="dsh"] #photo { left: var(--inset-left, 0px); }
 
 /* 面板 */
 #panel { position: fixed; inset: 0; background: rgba(0,0,0,0.55); display: flex; align-items: center; justify-content: center; }

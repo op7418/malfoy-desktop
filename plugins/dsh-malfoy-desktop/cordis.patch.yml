@@ -1,0 +1,4 @@
+# 马尔福桌面：Host 半边（视频路由、agent 事件、首屏黑幕）。浏览器半边由 package.json 的 dsh.client 声明加载。
+- insert:
+    - id: malfoy-desktop
+      name: 'dsh-malfoy-desktop'

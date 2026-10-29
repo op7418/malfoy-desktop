@@ -120,6 +120,31 @@ window.MALFOY = {
     [40, "她叫你：笨蛋"], // 入学登记做好以后换成你的名字（见 TODO）
   ],
 
+  // DeepSeek Harness 插件里，agent 做完一轮、等你批准、出错时她说的话；greet 是打开新会话时
+  agentLines: {
+    greet: [
+      ["又来了？说吧，什么事。", "Back again? Well, what is it?"],
+      ["坐。别挡着炉火。", "Sit. And don't block the fire."],
+      ["这么晚还有作业？", "Still at it, this late?"],
+    ],
+    done: [
+      ["做完了？……还行。别指望我夸你。", "Done? ...Acceptable. Don't expect praise."],
+      ["结束了。下次快一点。", "Finished. Be quicker next time."],
+      ["嗯，我看到了。……不错。", "Mm. I saw. ...Not bad."],
+      ["做完就去睡。别又熬到天亮。", "If you're done, go to bed. Not till dawn again."],
+    ],
+    approval: [
+      ["它在等你点头。我可不替你做决定。", "It's waiting for your nod. I'm not deciding for you."],
+      ["……看一眼再批准。别什么都签。", "...Read it before you approve. Don't just sign everything."],
+      ["该你了，转学生。", "Your move, transfer student."],
+    ],
+    error: [
+      ["……又炸了。我就当没看见。", "...It blew up again. I saw nothing."],
+      ["别慌。重来一遍。", "Don't panic. Again."],
+      ["这种错误，一年级都不会犯。", "Even a first-year wouldn't make that mistake."],
+    ],
+  },
+
   // 待机节奏（秒）
   idleHoldMin: 10,
   idleHoldMax: 24,

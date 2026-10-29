@@ -2,8 +2,11 @@
   const D = window.MALFOY;
   const $ = (s) => document.querySelector(s);
   const params = new URLSearchParams(location.search);
-  const MODE = params.get("mode") || "interactive"; // wallpaper | interactive
+  const MODE = params.get("mode") || "interactive"; // wallpaper | interactive | dsh
   document.body.dataset.mode = MODE;
+  // dsh：作为 DeepSeek Harness 插件的背景运行在 iframe 里（../dsh/）。台词、剧情开合交给外层页面显示和调度。
+  const DSH = MODE === "dsh";
+  const toHost = (m) => { if (DSH) parent.postMessage(Object.assign({ mf: 1 }, m), location.origin); };
 
   // ---------- 素材格式 ----------
   // Wallpaper Engine 的内置 Chromium（CEF）不带 H.264 / AAC / MP3 解码器，它的包里换成了 WebM / Ogg（tools/make-webm.sh）。
@@ -90,8 +93,8 @@
   const va = $("#va"), vb = $("#vb"), still = $("#still");
   let front = va, back = vb;
   let playerOpen = false;
-  let weMuted = false, weVolume = 1;
-  let busy = false, sleeping = false, idleTimer = 0, sceneId = D.scenes[S.scene] && S.aff >= D.scenes[S.scene].unlockAt ? S.scene : "sofa";
+  let weMuted = false, weVolume = 1, muteNext = false;
+  let busy = false, sleeping = false, agentBusy = false, idleTimer = 0, sceneId = D.scenes[S.scene] && S.aff >= D.scenes[S.scene].unlockAt ? S.scene : "sofa";
   const scene = () => D.scenes[sceneId];
 
   const bgm = $("#bgm");
@@ -100,6 +103,7 @@
     const muted = !S.sound || weMuted;
     va.muted = vb.muted = muted;
     va.volume = vb.volume = weVolume;
+    if (muteNext) front.muted = back.muted = true;
     // 背景钢琴压在环境声下面
     bgm.volume = 0.35 * weVolume;
     if (muted || playerOpen) bgm.pause();
@@ -158,7 +162,9 @@
     v.onended = null;
     v.style.transition = "none";
     v.src = media(src);
+    muteNext = !!opts.mute;
     applyVolume();
+    muteNext = false;
     v.currentTime = 0;
     let finished = false;
     const finish = () => {
@@ -207,7 +213,8 @@
   function scheduleIdle() {
     clearTimeout(idleTimer);
     if (sleeping) return;
-    const hold = D.idleHoldMin + Math.random() * (D.idleHoldMax - D.idleHoldMin);
+    // agent 在干活的时候，她翻页翻得更勤
+    const hold = (D.idleHoldMin + Math.random() * (D.idleHoldMax - D.idleHoldMin)) * (agentBusy ? 0.4 : 1);
     idleTimer = setTimeout(() => {
       if (busy || playerOpen) return scheduleIdle();
       const h = new Date().getHours();
@@ -224,7 +231,7 @@
     }, hold * 1000);
   }
 
-  function enterScene(id, withEntrance) {
+  function enterScene(id, withEntrance, noFade) {
     sceneId = id;
     S.scene = id;
     save();
@@ -233,11 +240,12 @@
     setStill(sc.anchor);
     placeHit();
     if (withEntrance && sc.enter) {
-      fadeBlack(() => {
+      const go = () => {
         if (sc.empty) setStill(sc.empty);
         setAmbient(null);
         playDesk(sc.enter, () => { setStill(sc.anchor); scheduleIdle(); }, { ambient: sc.ambient });
-      });
+      };
+      noFade ? go() : fadeBlack(go);
     } else {
       front.classList.remove("on");
       back.classList.remove("on");
@@ -266,6 +274,7 @@
   // 点她
   let bubbleTimer = 0;
   function bubble(zh, en, ms) {
+    if (DSH && !document.body.classList.contains("room")) return toHost({ type: "line", zh, en, ms: ms || 2600 });
     const b = $("#bubble");
     b.querySelector(".zh").textContent = zh;
     b.querySelector(".en").textContent = en;
@@ -315,6 +324,7 @@
     amb.pause();
     $("#player").classList.remove("hidden");
     applyVolume();
+    toHost({ type: "story", open: true });
   }
   function closePlayer() {
     playerOpen = false;
@@ -329,6 +339,7 @@
     if (amb.classList.contains("on")) amb.play().catch(() => {});
     scheduleIdle();
     applyVolume();
+    toHost({ type: "story", open: false });
   }
   function playStory(id, onEnd) {
     const c = D.clips[id];
@@ -590,17 +601,56 @@
     },
   };
 
+  // ---------- DeepSeek Harness：agent 的状态 ----------
+  const lineIdxs = {};
+  let lastReact = 0;
+  function pickLine(kind) {
+    const list = D.agentLines[kind];
+    lineIdxs[kind] = ((lineIdxs[kind] ?? Math.floor(Math.random() * list.length)) + 1) % list.length;
+    return list[lineIdxs[kind]];
+  }
+  function agentReact(state) {
+    if (state === "busy" || state === "idle") { agentBusy = state === "busy"; return; }
+    if (playerOpen || !D.agentLines[state]) return;
+    const [zh, en] = pickLine(state);
+    const now = Date.now();
+    // 做完、等批准：她抬眼看你一下（D4 的画面，不放配音）；报错只说一句，不打扰
+    if (state !== "error" && !busy && !sleeping && sceneId === "sofa" && now - lastReact > 20000) {
+      lastReact = now;
+      playDesk(scene().touch, scheduleIdle, { mute: true });
+      setTimeout(() => bubble(zh, en, 3600), 1300);
+    } else bubble(zh, en, 3600);
+  }
+  if (DSH) window.addEventListener("message", (e) => {
+    const m = e.data;
+    if (e.origin !== location.origin || !m || !m.mf) return;
+    if (m.type === "start") start(true);
+    if (m.type === "touch") $("#hit").click();
+    if (m.type === "room") {
+      document.body.classList.toggle("room", !!m.on);
+      document.body.style.setProperty("--inset-left", (m.inset || 0) + "px");
+    }
+    if (m.type === "agent") agentReact(m.state);
+    if (m.type === "greet" && !playerOpen && !sleeping) { const [zh, en] = pickLine("greet"); bubble(zh, en, 3200); }
+  });
+
   // ---------- 启动 ----------
   renderHud();
   applyVolume();
   const startWithEntrance = !params.has("noenter");
   // 第一次打开（Wallpaper Engine 里没有菜单栏入口）：先看第一章，看完她再走进休息室。
-  // macOS 的两个窗口都带 mode/noenter 参数，不走这里。
+  // macOS 的两个窗口都带 mode/noenter 参数，不走这里；dsh 里剧情从侧栏「休息室」进，启动不播。
   const firstCh = D.chapters.find((c) => c.flow);
-  if (MODE === "interactive" && startWithEntrance && firstCh && !S.introPlayed && !S.chapterDone[firstCh.id]) {
-    S.introPlayed = 1;
-    save();
-    setStill(scene().empty || scene().anchor);
-    runChapter(firstCh, () => enterScene(sceneId, true));
-  } else enterScene(sceneId, startWithEntrance);
+  const firstRun = MODE === "interactive" && startWithEntrance && firstCh && !S.introPlayed && !S.chapterDone[firstCh.id];
+  function start(noFade) {
+    if (firstRun) {
+      S.introPlayed = 1;
+      save();
+      setStill(scene().empty || scene().anchor);
+      runChapter(firstCh, () => enterScene(sceneId, true));
+    } else enterScene(sceneId, startWithEntrance, noFade);
+  }
+  // dsh：先停在空房间，等外层的开场动画走到一半再让她进来
+  if (DSH) { setStill(scene().empty || scene().anchor); toHost({ type: "ready" }); }
+  else start();
 })();

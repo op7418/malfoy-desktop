@@ -35,6 +35,14 @@
 3. 第一次打开会先播第一章，看完她会走进休息室。
 4. 要能点到她，在 Wallpaper Engine 的设置里打开「鼠标输入」。声音默认是关的，在壁纸属性里打开「壁纸声音」。
 
+**DeepSeek Harness**（主题插件）
+1. 装好 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness)，然后执行：
+   ```sh
+   dsh plugin --profile web add https://github.com/op7418/malfoy-desktop/releases/latest/download/dsh-malfoy-desktop.tgz
+   dsh web
+   ```
+2. 整个窗口会变成斯莱特林公共休息室：开场一团飞路火烧出界面，对话时背景虚化，agent 做完或等你批准时她会抬头说一句。剧情、相册、换装在侧栏的「休息室」里。详见 [插件说明](plugins/dsh-malfoy-desktop/README.md)。
+
 一个用 **即梦 AI 短剧工作室** 做的沉浸式角色扮演加 AI 女友桌面 Demo。
 
 你扮演刚转进斯莱特林的转学生，在午夜的禁书区遇见马尔福小姐。看完第一章之后，她会一直待在你桌面上的斯莱特林公共休息室里：
@@ -67,6 +75,8 @@
 │  ├─ mac/                  Electron 外壳与打包
 │  ├─ wallpaper-engine/     Windows 版工程文件（其余内容从 app/ 拷贝）
 │  └─ tools/                静止循环、图标生成脚本
+├─ plugins/
+│  └─ dsh-malfoy-desktop/   DeepSeek Harness 主题插件（网页部分复用 桌面程序/app/）
 └─ 工具/                    语音识别、响度母带、运动热图、安装包打包
 ```
 
@@ -121,6 +131,14 @@ npx hyperframes render -o renders/输出.mp4
 3. The first launch plays Chapter One, then she walks into the common room.
 4. Turn on **Mouse input** in Wallpaper Engine settings to interact with her. Sound is off by default; turn on 「壁纸声音」 (wallpaper sound) in the wallpaper's properties.
 
+**DeepSeek Harness** (theme plugin)
+1. Install [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness), then run:
+   ```sh
+   dsh plugin --profile web add https://github.com/op7418/malfoy-desktop/releases/latest/download/dsh-malfoy-desktop.tgz
+   dsh web
+   ```
+2. The whole window becomes the Slytherin common room: a Floo fire burns the interface in, the room blurs while you chat, and she looks up with a line when the agent finishes or needs approval. The story, album and outfits are under 「休息室」 in the sidebar. See the [plugin README](plugins/dsh-malfoy-desktop/README.md).
+
 **Malfoy Desktop** (马尔福桌面) is an immersive role-play demo and AI desktop companion starring Miss Malfoy, built with **Jimeng AI Short Drama Studio** (即梦 AI 短剧工作室).
 
 You play a new transfer student sorted into Slytherin. Late one night in the Restricted Section, you run into Miss Malfoy. After Chapter One, she stays on your desktop, in the Slytherin common room:
@@ -140,6 +158,7 @@ Code only. The videos, images, music, script and article are our own work and ar
 - `共享资源/` (shared): the Three.js magic effects library (`lib/magic.js`), UI kit and fonts
 - `剪辑/` (film) and `宣传片/` (trailer): HyperFrames video projects
 - `桌面程序/` (desktop app): the web core (playback engine, story, affection, album, UI), the Electron shell and the Wallpaper Engine project
+- `plugins/dsh-malfoy-desktop/`: the DeepSeek Harness theme plugin, which reuses the web core
 - `工具/` (tools): speech recognition, loudness mastering, motion maps, release packaging
 
 To run from source, put your own media at the paths listed in [MEDIA.md](MEDIA.md), then:
